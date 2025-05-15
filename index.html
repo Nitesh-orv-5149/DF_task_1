@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DF task-1</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="header">
+            <div class="game-title">Titan's Circuit</div>
+            <div class="game-controls">
+                <button class="btn btn-primary" id="instructionsBtn">Instructions</button>
+                <button class="btn btn-primary" id="pauseBtn">Pause</button>
+                <button class="btn btn-danger" id="resetBtn">Reset</button>
+            </div>
+        </div>
+        
+        <div class="players-info">
+            <div class="player-card player-red">
+                <div class="player-name">Red Player</div>
+                <div class="player-score">Score: <span id="redScore">0</span></div>
+                <div class="player-time">Time: <span id="redTime">2:00</span></div>
+                <div>Titans left: <span id="redTitansLeft">4</span></div>
+            </div>
+            
+            <div class="game-status" id="gameStatus">
+                Place your Titans on the outer circuit
+            </div>
+            
+            <div class="player-card player-blue">
+                <div class="player-name">Blue Player</div>
+                <div class="player-score">Score: <span id="blueScore">0</span></div>
+                <div class="player-time">Time: <span id="blueTime">2:00</span></div>
+                <div>Titans left: <span id="blueTitansLeft">4</span></div>
+            </div>
+        </div>
+        
+        <div class="game-board">
+            <div class="board-container">
+                <svg id="gameSvg" viewBox="-250 -250 500 500">
+                    <!-- pieces by JS -->
+                </svg>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Pause Modal -->
+    <div class="modal" id="pauseModal">
+        <div class="modal-content">
+            <div class="modal-title">Game Paused</div>
+            <p>The game is currently paused.</p>
+            <div class="modal-buttons">
+                <button class="btn btn-primary" id="resumeBtn">Resume Game</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Game Over Modal -->
+    <div class="modal" id="gameOverModal">
+        <div class="modal-content">
+            <div class="modal-title">Game Over</div>
+            <p id="gameOverMessage"></p>
+            <div class="modal-buttons">
+                <button class="btn btn-primary" id="newGameBtn">New Game</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Instructions Modal -->
+    <div class="modal" id="instructionsModal">
+        <div class="modal-content">
+            <div class="modal-title">Game Instructions</div>
+            <div class="instructions-container">
+                <h3>Game Setup</h3>
+                <p><strong>Board:</strong> Three concentric hexagonal circuits with numbered edge weights.</p>
+                <p><strong>Players:</strong> Each player has 4 Titans (Red and Blue).</p>
+                <p><strong>Timer:</strong> Each player gets 2 minutes total game time.</p>
+                
+                <h3>Game Phases</h3>
+                <h4>1. Placement Phase</h4>
+                <ul>
+                    <li>Players take turns placing Titans on the outermost circuit.</li>
+                    <li>When the outer circuit is filled, the middle circuit unlocks.</li>
+                    <li>When the middle circuit is filled, the inner circuit unlocks.</li>
+                </ul>
+                
+                <h4>2. Movement Phase</h4>
+                <ul>
+                    <li>After all Titans are placed, players move one Titan per turn.</li>
+                    <li>Titans can only move along edges to adjacent empty nodes.</li>
+                    <li>A Titan surrounded by opponent Titans is removed from play.</li>
+                </ul>
+                
+                <h3>Scoring</h3>
+                <ul>
+                    <li>Points are earned by controlling edges (when both connected nodes are occupied by your Titans).</li>
+                    <li>Points equal to the edge's weight are added to your score.</li>
+                    <li>If a Titan moves away from a controlled edge, points are deducted.</li>
+                </ul>
+                
+                <h3>Winning Conditions</h3>
+                <ul>
+                    <li>When a player's timer expires, they lose.</li>
+                    <li>When the innermost hexagon is fully occupied, the game ends and the player with the highest score wins.</li>
+                </ul>
+            </div>
+            <div class="modal-buttons">
+                <button class="btn btn-primary" id="closeInstructionsBtn">Close</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
